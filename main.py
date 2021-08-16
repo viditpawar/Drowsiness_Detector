@@ -24,16 +24,16 @@ while True:
         leftEye = []
         rightEye = []
 
-        for n in range(36,42):
+        for n in range(36, 42):
            x = face_landmarks.part(n).x
            y = face_landmarks.part(n).y
-           leftEye.append((x,y))
+           leftEye.append((x, y))
            next_point = n+1
            if n == 41:
               next_point = 36
            x2 = face_landmarks.part(next_point).x
            y2 = face_landmarks.part(next_point).y
-           cv2.line(frame,(x,y),(x2,y2),(0,255,0),1)
+           cv2.line(frame, (x, y), (x2, y2), (255, 255, 255), 1)
 
         for n in range(42,48):
            x = face_landmarks.part(n).x
@@ -44,16 +44,16 @@ while True:
               next_point = 42
            x2 = face_landmarks.part(next_point).x
            y2 = face_landmarks.part(next_point).y
-           cv2.line(frame,(x,y),(x2,y2),(0,255,0),1)
+           cv2.line(frame, (x, y), (x2, y2), (255, 255, 255), 1)
 
         left_ear = calculate_EAR(leftEye)
         right_ear = calculate_EAR(rightEye)
 
         EAR = (left_ear+right_ear)/2
-        EAR = round(EAR,2)
-        if EAR<0.26:
-           cv2.putText(frame,"User: DROWSY",(150,450),
-              cv2.FONT_HERSHEY_PLAIN,3,(255,0,0),4)
+        EAR = round(EAR, 2)
+        if EAR < 0.26:
+           cv2.putText(frame, "User: DROWSY", (150, 450),
+              cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 4)
         else:
             cv2.putText(frame, "User: ACTIVE", (150, 450),
             cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 4)
